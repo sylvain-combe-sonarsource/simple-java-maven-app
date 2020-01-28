@@ -10,10 +10,10 @@ pipeline {
     }
     stages {
         stage('Build') {
-            withSonarQubeEnv(installationName: 'ngrok syco') {
-                steps {
-                    sh 'mvn -X -B -DskipTests clean package sonar:sonar'
-                }
+            steps {
+                withSonarQubeEnv(installationName: 'ngrok syco') {
+                   sh 'mvn -X -B -DskipTests clean package sonar:sonar'
+               }
             }
         }
         stage('Test') {
