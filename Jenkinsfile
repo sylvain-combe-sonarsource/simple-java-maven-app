@@ -1,3 +1,9 @@
+if (env.BRANCH_NAME == 'master')
+   mybranch = ''
+else
+  mybranch = env.BRANCH_NAME
+
+
 pipeline {
     agent {
         docker {
@@ -10,14 +16,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                if (env.BRANCH_NAME == 'master')
-                     withSonarQubeEnv(installationName: 'ngrok syco') {
-                         sh 'mvn -X -B -DskipTests clean package sonar:sonar'
-                     }
-                else
-                     withSonarQubeEnv(installationName: 'ngrok syco') {
-                         sh 'mvn -X -B -Dsonar.branch.name=$GIT_BRANCH -DskipTests clean package sonar:sonar'
-                     }
+                 withSonarQubeEnv(installationName: 'ngrok syco') {
+                     sh 'mvn -X -B -Dsonar.branch.name=${mybranch} -DskipTests clean package sonar:sonar'
+                 }
             }
         }
         stage('Test') {
