@@ -11,7 +11,10 @@ pipeline {
         stage('Build') {
             steps {
                 withSonarQubeEnv(installationName: 'ngrok syco') {
-                   sh 'mvn -X -B -Dsonar.branch.name=$GIT_BRANCH -DskipTests clean package sonar:sonar'
+                   if($GIT_BRANCH == "master")
+                       sh 'mvn -X -B -DskipTests clean package sonar:sonar'
+                   else
+                       sh 'mvn -X -B -Dsonar.branch.name=$GIT_BRANCH -DskipTests clean package sonar:sonar'
                }
             }
         }
