@@ -4,7 +4,8 @@ else
   mybranch = env.BRANCH_NAME
 
 node {
-  echo "$env"
+  echo "hello here"
+  env.dump()
 }
 
 pipeline {
