@@ -4,8 +4,11 @@ else
   mybranch = env.BRANCH_NAME
 
 node {
-  echo "hello here"
-  env.dump()
+  echo "Branch name"
+  echo env.BRANCH_NAME
+  echo env.CHANGE_ID
+  echo env.CHANGE_BRANCH
+  echo env.CHANGE_TARGET
 }
 
 pipeline {
