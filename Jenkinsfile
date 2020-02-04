@@ -1,14 +1,31 @@
 if (env.BRANCH_NAME == 'master')
-   mybranch = ''
+   myBranch = ''
 else
-  mybranch = env.BRANCH_NAME
+  myBranch = env.BRANCH_NAME
 
 node {
-  echo "Branch name"
+  echo "Jenkins variables"
   echo env.BRANCH_NAME
+  echo myBranch
   echo env.CHANGE_ID
   echo env.CHANGE_BRANCH
   echo env.CHANGE_TARGET
+}
+
+if(env.CHANGE_ID != null) // PR analysis
+  mvnCmdLine = 'mvn -X -B -DskipTests \
+                   -Dsonar.pullrequest.key=${env.CHANGE_ID} \
+                   -Dsonar.pullrequest.branch=${mybranch} \
+                   -Dsonar.pullrequest.base=${env.CHANGE_TARGET} \
+                   clean package sonar:sonar'
+else // regular branch analysis
+  mvnCmdLine = 'mvn -X -B -DskipTests \
+                   -Dsonar.branch.name=${mybranch} \
+                   clean package sonar:sonar'
+
+node {
+  echo "My command line:"
+  echo mvnCmdLine
 }
 
 pipeline {
@@ -24,7 +41,7 @@ pipeline {
         stage('Build') {
             steps {
                  withSonarQubeEnv(installationName: 'ngrok syco') {
-                     sh 'mvn -X -B -Dsonar.branch.name=${mybranch} -DskipTests clean package sonar:sonar'
+                     sh '${mvnCmdLine}'
                  }
             }
         }
