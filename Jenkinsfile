@@ -20,7 +20,7 @@ if(env.CHANGE_ID != null) // PR analysis
                    clean package sonar:sonar'
 else // regular branch analysis
   mvnCmdLine = 'mvn -X -B -DskipTests \
-                   -Dsonar.branch.name=${myBÒranch} \
+                   -Dsonar.branch.name=${myBranch} \
                    clean package sonar:sonar'
 
 node {
