@@ -19,9 +19,16 @@ if(env.CHANGE_ID != null) // PR analysis
                    -Dsonar.pullrequest.base=${env.CHANGE_TARGET} \
                    clean package sonar:sonar'
 else // regular branch analysis
-  mvnCmdLine = 'mvn -X -B -DskipTests \
+  mvnCmdLine = "mvn -X -B -DskipTests \
                    -Dsonar.branch.name=${myBranch} \
-                   clean package sonar:sonar'
+                   clean package sonar:sonar"
+
+mvnCmdLine2 = "mvn -X -B -DskipTests \
+                   -Dsonar.branch.name=${env.BRANCH_NAME} \
+                   clean package sonar:sonar"
+mvnCmdLine3 = "mvn -X -B -DskipTests \
+                   -Dsonar.branch.name=$myBranch \
+                   clean package sonar:sonar"
 
 node {
   echo "My command line:"
