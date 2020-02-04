@@ -48,7 +48,7 @@ pipeline {
         stage('Build') {
             steps {
                  withSonarQubeEnv(installationName: 'ngrok syco') {
-                     sh "${mvnCmdLine}"
+                     sh '"${mvnCmdLine}"'
                  }
             }
         }
