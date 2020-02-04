@@ -13,22 +13,22 @@ node {
 }
 
 if(env.CHANGE_ID != null) // PR analysis
-  mvnCmdLine = 'mvn -X -B -DskipTests \
+  mvnCmdLine = "mvn -X -B -DskipTests \
                    -Dsonar.pullrequest.key=${env.CHANGE_ID} \
                    -Dsonar.pullrequest.branch=${myBranch} \
                    -Dsonar.pullrequest.base=${env.CHANGE_TARGET} \
-                   clean package sonar:sonar'
+                   clean package sonar:sonar"
 else // regular branch analysis
   mvnCmdLine = "mvn -X -B -DskipTests \
                    -Dsonar.branch.name=${myBranch} \
                    clean package sonar:sonar"
 
-mvnCmdLine2 = "mvn -X -B -DskipTests \
-                   -Dsonar.branch.name=${env.BRANCH_NAME} \
-                   clean package sonar:sonar"
-mvnCmdLine3 = "mvn -X -B -DskipTests \
-                   -Dsonar.branch.name=$myBranch \
-                   clean package sonar:sonar"
+// mvnCmdLine2 = "mvn -X -B -DskipTests \
+//                    -Dsonar.branch.name=${env.BRANCH_NAME} \
+//                    clean package sonar:sonar"
+// mvnCmdLine3 = "mvn -X -B -DskipTests \
+//                    -Dsonar.branch.name=$myBranch \
+//                    clean package sonar:sonar"
 
 node {
   echo "My command line:"
@@ -48,7 +48,7 @@ pipeline {
         stage('Build') {
             steps {
                  withSonarQubeEnv(installationName: 'ngrok syco') {
-                     sh '${mvnCmdLine}'
+                     sh "${mvnCmdLine}"
                  }
             }
         }
