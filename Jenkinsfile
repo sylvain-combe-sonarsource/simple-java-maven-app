@@ -1,5 +1,5 @@
 if (env.BRANCH_NAME == 'master')
-   myBranch = ''
+  myBranch = ''
 else
   myBranch = env.BRANCH_NAME
 
