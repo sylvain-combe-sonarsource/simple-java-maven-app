@@ -3,6 +3,9 @@ if (env.BRANCH_NAME == 'master')
 else
   mybranch = env.BRANCH_NAME
 
+node {
+  echo "$env"
+}
 
 pipeline {
     agent {
