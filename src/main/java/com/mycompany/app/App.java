@@ -25,14 +25,17 @@ public class App
         }
     }
 
-    private final String getMessage() throws InterruptedException {
+    private final String getMessage(boolean isSync) throws InterruptedException {
         synchronized (this.msg1) {
             // threadB can't enter this block to request this.mon2 lock & release threadA
             synchronized (this.msg2) {
                 this.msg2.wait();  // Noncompliant; threadA is stuck here holding lock on this.mon1
             }
         }
+        return message;
+    }
 
+    private final String getMessage() throws InterruptedException {
         return message;
     }
 
