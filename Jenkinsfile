@@ -38,7 +38,7 @@ node {
 pipeline {
     agent {
         docker {
-            image 'maven:3-alpine'
+            image 'masstroy/alpine-docker-java-maven'
         }
     }
     options {
