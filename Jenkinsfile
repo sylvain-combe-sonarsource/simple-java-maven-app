@@ -47,12 +47,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 withSonarQubeEnv(installationName: 'ngrok syco') {
-                     sh "${mvnCmdLine}"
+                 withSonarQubeEnv(installationName: 'SQ82') {
                      script {
                          // fetch master from origin so sonar scanner comparison works
-                         sh "git fetch --no-tags ${GIT_URL} +refs/heads/master:refs/remotes/origin/master"
-                         sh "${mvnCmdLine}"
+                         // sh "git fetch --no-tags ${GIT_URL} +refs/heads/master:refs/remotes/origin/master"
+                         // sh "${mvnCmdLine}"
+                         sh 'mvn clean package sonar:sonar'
                      }
                  }
             }
