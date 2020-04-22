@@ -38,23 +38,30 @@ node {
 pipeline {
     agent {
         docker {
-            image 'masstroy/alpine-docker-java-maven'
+            // image 'masstroy/alpine-docker-java-maven'
+            image 'maven:3-alpine'
+            args '-v $HOME/.m2:/root/.m2'
         }
     }
     options {
         skipStagesAfterUnstable()
     }
     stages {
+        stage('SCM') {
+            steps {
+                git 'https://github.com/sylvain-combe-sonarsource/simple-java-maven-app.git'
+            }
+        }
         stage('Build') {
             steps {
-                 withSonarQubeEnv(installationName: 'ngrok syco') {
-                     sh "${mvnCmdLine}"
-                     script {
+                withSonarQubeEnv(installationName: 'SQ82') {
+                 //    script {
                          // fetch master from origin so sonar scanner comparison works
-                         sh "git fetch --no-tags ${GIT_URL} +refs/heads/master:refs/remotes/origin/master"
-                         sh "${mvnCmdLine}"
-                     }
-                 }
+                         // sh "git fetch --no-tags ${GIT_URL} +refs/heads/master:refs/remotes/origin/master"
+                         // sh "${mvnCmdLine}"
+                    sh 'mvn clean package sonar:sonar'
+                //    }
+                }
             }
         }
         stage('Test') {
