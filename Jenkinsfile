@@ -33,8 +33,8 @@ pipeline {
         docker {
             // image 'masstroy/alpine-docker-java-maven'
             image 'maven:3-alpine'
-            args '-v maven-cache:$HOME/.m2 \
-                 -v sonar-cache:$HOME/.sonar/cache'
+            args '-v maven-cache:$root/.m2 \
+                 -v sonar-cache:$root/.sonar/cache'
         }
     }
     options {
@@ -54,7 +54,7 @@ pipeline {
                  //    script {
                          // fetch master from origin so sonar scanner comparison works
                          // sh "git fetch --no-tags ${GIT_URL} +refs/heads/master:refs/remotes/origin/master"
-                    sh "${mvnCmdLine} -Duser.home=$HOME"
+                    sh "${mvnCmdLine}"
                     // sh 'mvn clean package sonar:sonar'
                 //    }
                 }
