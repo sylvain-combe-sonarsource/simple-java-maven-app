@@ -33,8 +33,8 @@ pipeline {
         docker {
             // image 'masstroy/alpine-docker-java-maven'
             image 'maven:3-alpine'
-            args '-v $HOME/.m2:/root/.m2'
-            args '-v $HOME/.sonar/cache:/root/.sonar/cache'
+            args '-v mavencache:/root/.m2'
+            args '-v sonarcache:/root/.sonar/cache'
         }
     }
     options {
