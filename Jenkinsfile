@@ -17,10 +17,12 @@ if(env.CHANGE_ID != null) // PR analysis
                    -Dsonar.pullrequest.key=${env.CHANGE_ID} \
                    -Dsonar.pullrequest.branch=${myBranch} \
                    -Dsonar.pullrequest.base=${env.CHANGE_TARGET} \
+                   -Duser.home=$HOME  \
                    clean package sonar:sonar"
 else // regular branch analysis
   mvnCmdLine = "mvn -X -B -DskipTests \
                    -Dsonar.branch.name=${myBranch} \
+                   -Duser.home=$HOME \
                    clean package sonar:sonar"
 
 node {
@@ -33,8 +35,8 @@ pipeline {
         docker {
             // image 'masstroy/alpine-docker-java-maven'
             image 'maven:3-alpine'
-            args '-v mavencache:/root/.m2'
-            args '-v sonarcache:/root/.sonar/cache'
+            args '-v mavencache:$HOME/.m2' \
+                 '-v sonarcache:$HOME/.sonar/cache'
         }
     }
     options {
