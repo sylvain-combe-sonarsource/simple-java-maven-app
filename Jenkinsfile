@@ -53,8 +53,8 @@ pipeline {
                  //    script {
                          // fetch master from origin so sonar scanner comparison works
                          // sh "git fetch --no-tags ${GIT_URL} +refs/heads/master:refs/remotes/origin/master"
-                    sh "${mvnCmdLine}"
-                    // sh 'mvn clean package sonar:sonar'
+                    // sh "${mvnCmdLine}"
+                    sh 'mvn clean package sonar:sonar'
                 //    }
                 }
             }
