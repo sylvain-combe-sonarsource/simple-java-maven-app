@@ -23,13 +23,6 @@ else // regular branch analysis
                    -Dsonar.branch.name=${myBranch} \
                    clean package sonar:sonar"
 
-// mvnCmdLine2 = "mvn -X -B -DskipTests \
-//                    -Dsonar.branch.name=${env.BRANCH_NAME} \
-//                    clean package sonar:sonar"
-// mvnCmdLine3 = "mvn -X -B -DskipTests \
-//                    -Dsonar.branch.name=$myBranch \
-//                    clean package sonar:sonar"
-
 node {
   echo "My command line:"
   echo mvnCmdLine
@@ -58,8 +51,8 @@ pipeline {
                  //    script {
                          // fetch master from origin so sonar scanner comparison works
                          // sh "git fetch --no-tags ${GIT_URL} +refs/heads/master:refs/remotes/origin/master"
-                         // sh "${mvnCmdLine}"
-                    sh 'mvn clean package sonar:sonar'
+                    sh "${mvnCmdLine}"
+                    // sh 'mvn clean package sonar:sonar'
                 //    }
                 }
             }
