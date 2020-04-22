@@ -45,17 +45,20 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
+        stage('SCM') {
+            git 'https://github.com/sylvain-combe-sonarsource/simple-java-maven-app.git'
+        }
         stage('Build') {
-            steps {
-                 withSonarQubeEnv(installationName: 'SQ82') {
-                     script {
+ //           steps {
+            withSonarQubeEnv(installationName: 'SQ82') {
+                 //    script {
                          // fetch master from origin so sonar scanner comparison works
                          // sh "git fetch --no-tags ${GIT_URL} +refs/heads/master:refs/remotes/origin/master"
                          // sh "${mvnCmdLine}"
-                         sh 'mvn clean package sonar:sonar'
-                     }
-                 }
+                sh 'mvn clean package sonar:sonar'
+                //    }
             }
+   //         }
         }
         stage('Test') {
             steps {
