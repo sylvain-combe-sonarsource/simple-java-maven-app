@@ -43,9 +43,9 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                // git 'https://github.com/sylvain-combe-sonarsource/simple-java-maven-app.git'
+              // git 'https://github.com/sylvain-combe-sonarsource/simple-java-maven-app.git'
               // sh "git fetch --no-tags ${GIT_URL} +refs/heads/master:refs/remotes/origin/master"
-              sh "echo ${GIT_URL}"
+              sh "echo toto"
             }
         }
         stage('Build') {
