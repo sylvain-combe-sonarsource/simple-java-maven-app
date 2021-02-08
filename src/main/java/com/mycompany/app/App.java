@@ -39,5 +39,8 @@ public class App
         return message;
     }
 
+    private final String doNothing() throws InterruptedException {
+        return null;
+    }
 
 }
