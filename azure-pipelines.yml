@@ -36,12 +36,14 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'clean package sonar:sonar'
+
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: |
       # Write your PowerShell commands here.
-      Start-Sleep -Seconds 10
+      Start-Sleep -Seconds 1
+
 - task: SonarQubePublish@4
   inputs:
     pollingTimeoutSec: '300'
