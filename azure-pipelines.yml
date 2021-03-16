@@ -4,9 +4,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- *
+- master
+- branch*
+- feature*
 pr:
-- *
+- master
+- br*
+- feature*
 
 pool:
   vmImage: ubuntu-latest
