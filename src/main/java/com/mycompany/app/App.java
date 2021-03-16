@@ -23,7 +23,6 @@ public class App
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("The end");
     }
 
     private final String getMessage(boolean isSync) throws InterruptedException {
