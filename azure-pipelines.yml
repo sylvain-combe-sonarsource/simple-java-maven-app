@@ -30,6 +30,9 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'clean package sonar:sonar'
+- task: Delay@1
+  inputs:
+    delayForMinutes: '1'
 - task: SonarQubePublish@4
   inputs:
     pollingTimeoutSec: '300'
