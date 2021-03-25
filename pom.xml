@@ -42,8 +42,8 @@
     <properties>
       <maven.compiler.source>1.8</maven.compiler.source>
       <maven.compiler.target>1.8</maven.compiler.target>
-      <!--sonar.projectKey>sylvain-combe-sonarsource_simple-java-maven-app</sonar.projectKey>
-      <sonar.organization>sylvain-combe-sonarsource</sonar.organization>
+      <sonar.projectKey>sylvain-combe-sonarsource_simple-java-maven-app</sonar.projectKey>
+      <!--sonar.organization>sylvain-combe-sonarsource</sonar.organization>
       <sonar.host.url>https://sonarcloud.io</sonar.host.url>
       <sonar.login>d58f0d63d88254491a09164a0deb397298a99f6e</sonar.login-->
   </properties>
